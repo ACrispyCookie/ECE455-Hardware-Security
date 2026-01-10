@@ -13,6 +13,9 @@ from packaging.version import Version as StrictVersion
 from print_message import extract_message
 
 OUTPUT_FILE = '/home/tsiantosd/Desktop/output.txt'
+LOW_THRESHOLD = 0.042
+HIGH_THRESHOLD = 0.082
+POWER_SQUELCH_DB = -38
 
 if __name__ == '__main__':
     import ctypes
@@ -227,14 +230,14 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.iio_pluto_source_1.set_bbdc(True)
         self.iio_pluto_source_1.set_filter_params('Auto', '', 0, 0)
         self.digital_correlate_access_code_tag_xx_0 = digital.correlate_access_code_tag_bb('10101001', 0, 'frame_start')
-        self.blocks_threshold_ff_0 = blocks.threshold_ff(0.042, 0.082, 0)
+        self.blocks_threshold_ff_0 = blocks.threshold_ff(LOW_THRESHOLD, HIGH_THRESHOLD, 0)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
         self.blocks_keep_one_in_n_0_0 = blocks.keep_one_in_n(gr.sizeof_float*1, sps)
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, OUTPUT_FILE, False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
-        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-38, 1e-4, 0, True)
+        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(POWER_SQUELCH_DB, 1e-4, 0, True)
 
 
         ##################################################

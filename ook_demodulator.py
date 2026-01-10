@@ -10,6 +10,9 @@
 # GNU Radio version: 3.10.1.1
 
 from packaging.version import Version as StrictVersion
+from print_message import extract_message
+
+OUTPUT_FILE = '/home/tsiantosd/Desktop/output.txt'
 
 if __name__ == '__main__':
     import ctypes
@@ -228,7 +231,7 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
         self.blocks_keep_one_in_n_0_0 = blocks.keep_one_in_n(gr.sizeof_float*1, sps)
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, '/home/tsiantosd/Desktop/output.txt', False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, OUTPUT_FILE, False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
         self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-38, 1e-4, 0, True)
@@ -256,6 +259,13 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
+
+        try:
+            print("\n--- Decoded message ---")
+            print(extract_message(OUTPUT_FILE))
+            print("-----------------------\n")
+        except Exception as e:
+            print(f"Message decode failed: {e}")
 
         event.accept()
 

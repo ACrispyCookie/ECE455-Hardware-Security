@@ -42,10 +42,10 @@ blocks:
     min_len: '200'
     orient: QtCore.Qt.Horizontal
     rangeType: int
-    start: '200000000'
+    start: '90000'
     step: '5000000'
     stop: '3650000000'
-    value: '1333000000'
+    value: '104500000'
     widget: counter_slider
   states:
     bus_sink: false
@@ -95,6 +95,57 @@ blocks:
     coordinate: [736, 236.0]
     rotation: 0
     state: disabled
+- name: analog_wfm_rcv_0_0
+  id: analog_wfm_rcv
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_decimation: '8'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: '384000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 564.0]
+    rotation: 0
+    state: enabled
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: sample_rate_i
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 332.0]
+    rotation: 0
+    state: disabled
+- name: audio_sink_0_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: sample_rate_i
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [752, 668.0]
+    rotation: 0
+    state: true
 - name: blocks_wavfile_sink_0
   id: blocks_wavfile_sink
   parameters:
@@ -169,7 +220,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 220.0]
+    coordinate: [472, 204.0]
     rotation: 0
     state: disabled
 - name: qtgui_sink_x_0
@@ -198,12 +249,15 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 372.0]
+    coordinate: [496, 356.0]
     rotation: 0
     state: enabled
 
 connections:
+- [analog_wfm_rcv_0, '0', audio_sink_0, '0']
 - [analog_wfm_rcv_0, '0', blocks_wavfile_sink_0, '0']
+- [analog_wfm_rcv_0_0, '0', audio_sink_0_0, '0']
+- [iio_pluto_source_0, '0', analog_wfm_rcv_0_0, '0']
 - [iio_pluto_source_0, '0', low_pass_filter_0, '0']
 - [iio_pluto_source_0, '0', qtgui_sink_x_0, '0']
 - [low_pass_filter_0, '0', analog_wfm_rcv_0, '0']

@@ -286,7 +286,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/tsiantosd/Desktop/output.txt
+    file: /tmp/output.bin
     type: byte
     unbuffered: 'False'
     vlen: '1'

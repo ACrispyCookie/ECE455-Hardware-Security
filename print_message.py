@@ -1,42 +1,50 @@
-def extract_message(filename,
-                    preamble="10101001",
-                    eom="11111111"):
-    # Read file as raw bytes
+import time
+import sys
+
+PREAMBLE = "10101001"
+EOM = "11111111"
+
+def stream_decode(filename):
+    bit_buffer = ""
+    message_started = False
+
     with open(filename, "rb") as f:
-        data = f.read()
+        f.seek(0, 0)
 
-    # Convert bytes to a continuous bit string
-    bitstream = "".join(f"{byte:08b}" for byte in data)
+        while True:
+            chunk = f.read(1024)
+            if not chunk:
+                time.sleep(0.05)
+                continue
 
-    # Find preamble
-    start = bitstream.find(preamble)
-    if start == -1:
-        raise ValueError("Preamble not found")
+            for byte in chunk:
+                bit_buffer += f"{byte:08b}"
 
-    # Start reading right after preamble
-    cursor = start + len(preamble)
-    message_bits = ""
+                # Look for preamble only once
+                if not message_started:
+                    idx = bit_buffer.find(PREAMBLE)
+                    if idx != -1:
+                        bit_buffer = bit_buffer[idx + len(PREAMBLE):]
+                        message_started = True
+                    else:
+                        # Keep buffer bounded
+                        bit_buffer = bit_buffer[-len(PREAMBLE):]
+                        continue
 
-    while cursor + 8 <= len(bitstream):
-        byte = bitstream[cursor:cursor + 8]
+                # Decode full bytes
+                while len(bit_buffer) >= 8:
+                    b = bit_buffer[:8]
+                    bit_buffer = bit_buffer[8:]
 
-        if byte == eom:
-            break
+                    if b == EOM:
+                        print("\n<EOM>")
+                        return
 
-        message_bits += byte
-        cursor += 8
-
-    # Convert message bits to characters
-    message = ""
-    for i in range(0, len(message_bits), 8):
-        byte = message_bits[i:i + 8]
-        message += chr(int(byte, 2))
-
-    return message
+                    sys.stdout.write(chr(int(b, 2)))
+                    sys.stdout.flush()
 
 
 if __name__ == "__main__":
-    filename = "/home/panagivths/Documents/GitHub/ECE455-Hardware-Security/output.txt"
-    msg = extract_message(filename)
-    print("Decoded message:")
-    print(msg)
+    filename = sys.argv[1] if len(sys.argv) == 2 else "/tmp/output.bin"
+    print("Listening for message...\n")
+    stream_decode(filename)

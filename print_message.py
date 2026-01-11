@@ -36,7 +36,7 @@ def extract_message(filename,
 
 
 if __name__ == "__main__":
-    filename = "/home/tsiantosd/Desktop/output.txt"
+    filename = "/home/panagivths/Documents/GitHub/ECE455-Hardware-Security/output.txt"
     msg = extract_message(filename)
     print("Decoded message:")
     print(msg)

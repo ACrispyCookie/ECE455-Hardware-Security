@@ -26,7 +26,6 @@ from gnuradio import qtgui
 from gnuradio.filter import firdes
 import sip
 from gnuradio import blocks
-import pmt
 from gnuradio import gr
 from gnuradio.fft import window
 import sys
@@ -34,6 +33,7 @@ import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
+from gnuradio import iio
 from gnuradio.qtgui import Range, RangeWidget
 from PyQt5 import QtCore
 
@@ -86,7 +86,7 @@ class capture(gr.top_block, Qt.QWidget):
         self._selected_frequency_range = Range(80000, 3650000000, 10000, 1333315000, 200)
         self._selected_frequency_win = RangeWidget(self._selected_frequency_range, self.set_selected_frequency, "'selected_frequency'", "counter_slider", int, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._selected_frequency_win)
-        self.qtgui_sink_x_0_0 = qtgui.sink_c(
+        self.qtgui_sink_x_0 = qtgui.sink_c(
             1024, #fftsize
             window.WIN_BLACKMAN_hARRIS, #wintype
             0, #fc
@@ -98,22 +98,31 @@ class capture(gr.top_block, Qt.QWidget):
             True, #plotconst
             None # parent
         )
-        self.qtgui_sink_x_0_0.set_update_time(1.0/10)
-        self._qtgui_sink_x_0_0_win = sip.wrapinstance(self.qtgui_sink_x_0_0.qwidget(), Qt.QWidget)
+        self.qtgui_sink_x_0.set_update_time(1.0/10)
+        self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.qwidget(), Qt.QWidget)
 
-        self.qtgui_sink_x_0_0.enable_rf_freq(False)
+        self.qtgui_sink_x_0.enable_rf_freq(False)
 
-        self.top_layout.addWidget(self._qtgui_sink_x_0_0_win)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/tsiantosd/Desktop/capture.raw', False, 0, 0)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
+        self.top_layout.addWidget(self._qtgui_sink_x_0_win)
+        self.iio_pluto_source_1 = iio.fmcomms2_source_fc32('ip:192.168.2.1' if 'ip:192.168.2.1' else iio.get_pluto_uri(), [True, True], 32768)
+        self.iio_pluto_source_1.set_len_tag_key('packet_len')
+        self.iio_pluto_source_1.set_frequency(selected_frequency)
+        self.iio_pluto_source_1.set_samplerate(samp_rate)
+        self.iio_pluto_source_1.set_gain_mode(0, 'slow_attack')
+        self.iio_pluto_source_1.set_gain(0, 64)
+        self.iio_pluto_source_1.set_quadrature(True)
+        self.iio_pluto_source_1.set_rfdc(True)
+        self.iio_pluto_source_1.set_bbdc(True)
+        self.iio_pluto_source_1.set_filter_params('Auto', '', 0, 0)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/tsiantosd/Desktop/hello_world-capture-8-bits.raw', False)
+        self.blocks_file_sink_0.set_unbuffered(False)
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_sink_x_0_0, 0))
+        self.connect((self.iio_pluto_source_1, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.iio_pluto_source_1, 0), (self.qtgui_sink_x_0, 0))
 
 
     def closeEvent(self, event):
@@ -129,14 +138,15 @@ class capture(gr.top_block, Qt.QWidget):
 
     def set_selected_frequency(self, selected_frequency):
         self.selected_frequency = selected_frequency
+        self.iio_pluto_source_1.set_frequency(self.selected_frequency)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_sink_x_0_0.set_frequency_range(0, self.samp_rate)
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
+        self.iio_pluto_source_1.set_samplerate(self.samp_rate)
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
 
 

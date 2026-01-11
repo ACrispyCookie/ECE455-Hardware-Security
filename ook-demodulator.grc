@@ -33,6 +33,18 @@ options:
     state: enabled
 
 blocks:
+- name: bitss
+  id: variable
+  parameters:
+    comment: ''
+    value: '16'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 12.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -63,7 +75,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 12.0]
+    coordinate: [768, 12.0]
     rotation: 0
     state: true
 - name: sps
@@ -82,12 +94,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: samp_rate//4
+    value: samp_rate//bitss
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 84.0]
+    coordinate: [544, 12.0]
     rotation: 0
     state: true
 - name: analog_pwr_squelch_xx_0
@@ -101,7 +113,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     ramp: '0'
-    threshold: '-38'
+    threshold: '-28'
     type: complex
   states:
     bus_sink: false
@@ -163,27 +175,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [3992, 396.0]
+    coordinate: [3976, 396.0]
     rotation: 0
     state: enabled
-- name: blocks_file_sink_0_0
-  id: blocks_file_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    append: 'False'
-    comment: ''
-    file: /home/tsiantosd/Desktop/hello_world-capture.raw
-    type: complex
-    unbuffered: 'False'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [504, 140.0]
-    rotation: 0
-    state: disabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -238,9 +232,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2384, 804.0]
+    coordinate: [2376, 1028.0]
     rotation: 0
     state: disabled
+- name: blocks_keep_m_in_n_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    m: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: sps
+    offset: sps//2
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2560, 396.0]
+    rotation: 0
+    state: enabled
 - name: blocks_keep_one_in_n_0
   id: blocks_keep_one_in_n
   parameters:
@@ -256,10 +269,46 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2856, 520.0]
+    coordinate: [2848, 744.0]
     rotation: 0
     state: disabled
 - name: blocks_keep_one_in_n_0_0
+  id: blocks_keep_one_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: sps//2
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2336, 592.0]
+    rotation: 0
+    state: disabled
+- name: blocks_keep_one_in_n_0_0_0
+  id: blocks_keep_one_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2744, 592.0]
+    rotation: 0
+    state: disabled
+- name: blocks_keep_one_in_n_1
   id: blocks_keep_one_in_n
   parameters:
     affinity: ''
@@ -274,9 +323,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2384, 416.0]
+    coordinate: [2744, 512.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_moving_average_xx_0
   id: blocks_moving_average_xx
   parameters:
@@ -294,7 +343,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2384, 492.0]
+    coordinate: [2376, 716.0]
     rotation: 0
     state: disabled
 - name: blocks_moving_average_xx_0_0
@@ -314,7 +363,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2616, 492.0]
+    coordinate: [2608, 716.0]
     rotation: 0
     state: disabled
 - name: blocks_multiply_xx_0
@@ -369,6 +418,24 @@ blocks:
     coordinate: [312, 932.0]
     rotation: 0
     state: disabled
+- name: blocks_skiphead_0
+  id: blocks_skiphead
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: sps//2
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2328, 508.0]
+    rotation: 0
+    state: disabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
   parameters:
@@ -384,7 +451,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2384, 604.0]
+    coordinate: [2376, 828.0]
     rotation: 0
     state: disabled
 - name: blocks_threshold_ff_0
@@ -393,9 +460,9 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    high: '0.082'
+    high: '0.18'
     init: '0'
-    low: '0.042'
+    low: '0.18'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -420,7 +487,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [3064, 500.0]
+    coordinate: [3056, 724.0]
     rotation: 0
     state: disabled
 - name: blocks_throttle_0
@@ -505,7 +572,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1944, 356.0]
+    coordinate: [1904, 692.0]
     rotation: 0
     state: disabled
 - name: fir_filter_xxx_0
@@ -524,7 +591,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2384, 700.0]
+    coordinate: [2376, 924.0]
     rotation: 0
     state: disabled
 - name: iio_pluto_source_1
@@ -1639,11 +1706,14 @@ connections:
 - [blocks_file_source_0, '0', blocks_throttle_0, '0']
 - [blocks_float_to_char_0, '0', digital_correlate_access_code_tag_xx_0, '0']
 - [blocks_integrate_xx_0, '0', qtgui_time_sink_x_1_0_0, '0']
+- [blocks_keep_m_in_n_0, '0', blocks_float_to_char_0, '0']
 - [blocks_keep_one_in_n_0, '0', blocks_threshold_ff_1, '0']
 - [blocks_keep_one_in_n_0, '0', qtgui_number_sink_0, '0']
 - [blocks_keep_one_in_n_0, '0', qtgui_time_sink_x_1_0_0_0, '0']
-- [blocks_keep_one_in_n_0_0, '0', blocks_float_to_char_0, '0']
+- [blocks_keep_one_in_n_0_0, '0', blocks_keep_one_in_n_0_0_0, '0']
 - [blocks_keep_one_in_n_0_0, '0', blocks_moving_average_xx_0_0, '0']
+- [blocks_keep_one_in_n_0_0_0, '0', blocks_float_to_char_0, '0']
+- [blocks_keep_one_in_n_1, '0', blocks_float_to_char_0, '0']
 - [blocks_moving_average_xx_0, '0', blocks_keep_one_in_n_0, '0']
 - [blocks_moving_average_xx_0, '0', qtgui_time_sink_x_1_0_0, '0']
 - [blocks_moving_average_xx_0_0, '0', blocks_keep_one_in_n_0, '0']
@@ -1653,9 +1723,12 @@ connections:
 - [blocks_multiply_xx_0, '0', virtual_sink_0, '0']
 - [blocks_pack_k_bits_bb_0, '0', blocks_file_sink_0, '0']
 - [blocks_repeat_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_skiphead_0, '0', blocks_keep_one_in_n_1, '0']
 - [blocks_threshold_ff_0, '0', blocks_integrate_xx_0, '0']
+- [blocks_threshold_ff_0, '0', blocks_keep_m_in_n_0, '0']
 - [blocks_threshold_ff_0, '0', blocks_keep_one_in_n_0_0, '0']
 - [blocks_threshold_ff_0, '0', blocks_moving_average_xx_0, '0']
+- [blocks_threshold_ff_0, '0', blocks_skiphead_0, '0']
 - [blocks_threshold_ff_0, '0', blocks_stream_to_vector_0, '0']
 - [blocks_threshold_ff_0, '0', digital_symbol_sync_xx_0, '0']
 - [blocks_threshold_ff_0, '0', fir_filter_xxx_0, '0']
@@ -1670,7 +1743,6 @@ connections:
 - [digital_symbol_sync_xx_0, '0', qtgui_time_sink_x_1_0_1, '0']
 - [fir_filter_xxx_0, '0', blocks_threshold_ff_1, '0']
 - [fir_filter_xxx_0, '0', qtgui_time_sink_x_1_0_0, '0']
-- [iio_pluto_source_1, '0', blocks_file_sink_0_0, '0']
 - [iio_pluto_source_1, '0', low_pass_filter_0, '0']
 - [iio_pluto_source_1, '0', qtgui_sink_x_0, '0']
 - [iio_pluto_source_1, '0', qtgui_waterfall_sink_x_0, '0']

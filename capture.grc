@@ -73,7 +73,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/tsiantosd/Desktop/capture.raw
+    file: /home/tsiantosd/Desktop/hello_world-capture-8-bits.raw
     type: complex
     unbuffered: 'False'
     vlen: '1'
@@ -83,7 +83,7 @@ blocks:
     bus_structure: null
     coordinate: [608, 300.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_file_source_0
   id: blocks_file_source
   parameters:
@@ -105,7 +105,7 @@ blocks:
     bus_structure: null
     coordinate: [216, 580.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -124,7 +124,7 @@ blocks:
     bus_structure: null
     coordinate: [552, 612.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: iio_pluto_source_1
   id: iio_pluto_source
   parameters:
@@ -155,7 +155,7 @@ blocks:
     bus_structure: null
     coordinate: [208, 244.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -184,7 +184,7 @@ blocks:
     bus_structure: null
     coordinate: [608, 412.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_sink_x_0_0
   id: qtgui_sink_x
   parameters:
@@ -213,7 +213,7 @@ blocks:
     bus_structure: null
     coordinate: [824, 580.0]
     rotation: 0
-    state: enabled
+    state: disabled
 
 connections:
 - [blocks_file_source_0, '0', blocks_throttle_0, '0']

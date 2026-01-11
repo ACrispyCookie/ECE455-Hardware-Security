@@ -10,12 +10,6 @@
 # GNU Radio version: 3.10.1.1
 
 from packaging.version import Version as StrictVersion
-from print_message import extract_message
-
-OUTPUT_FILE = '/home/tsiantosd/Desktop/output.txt'
-LOW_THRESHOLD = 0.042
-HIGH_THRESHOLD = 0.082
-POWER_SQUELCH_DB = -38
 
 if __name__ == '__main__':
     import ctypes
@@ -87,7 +81,8 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 1000000
-        self.sps = sps = samp_rate//4
+        self.bitss = bitss = 16
+        self.sps = sps = samp_rate//bitss
         self.selected_frequency = selected_frequency = 1333313000
 
         ##################################################
@@ -230,14 +225,14 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.iio_pluto_source_1.set_bbdc(True)
         self.iio_pluto_source_1.set_filter_params('Auto', '', 0, 0)
         self.digital_correlate_access_code_tag_xx_0 = digital.correlate_access_code_tag_bb('10101001', 0, 'frame_start')
-        self.blocks_threshold_ff_0 = blocks.threshold_ff(LOW_THRESHOLD, HIGH_THRESHOLD, 0)
+        self.blocks_threshold_ff_0 = blocks.threshold_ff(0.18, 0.18, 0)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(8)
-        self.blocks_keep_one_in_n_0_0 = blocks.keep_one_in_n(gr.sizeof_float*1, sps)
+        self.blocks_keep_m_in_n_0 = blocks.keep_m_in_n(gr.sizeof_float, 1, sps, sps//2)
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, OUTPUT_FILE, False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, '/home/tsiantosd/Desktop/output.txt', False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
-        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(POWER_SQUELCH_DB, 1e-4, 0, True)
+        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-28, 1e-4, 0, True)
 
 
         ##################################################
@@ -247,9 +242,9 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_complex_to_mag_0, 0), (self.blocks_threshold_ff_0, 0))
         self.connect((self.blocks_complex_to_mag_0, 0), (self.qtgui_time_sink_x_0_0, 0))
         self.connect((self.blocks_float_to_char_0, 0), (self.digital_correlate_access_code_tag_xx_0, 0))
-        self.connect((self.blocks_keep_one_in_n_0_0, 0), (self.blocks_float_to_char_0, 0))
+        self.connect((self.blocks_keep_m_in_n_0, 0), (self.blocks_float_to_char_0, 0))
         self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.blocks_file_sink_0, 0))
-        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_keep_one_in_n_0_0, 0))
+        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_keep_m_in_n_0, 0))
         self.connect((self.blocks_threshold_ff_0, 0), (self.qtgui_time_sink_x_1_0, 0))
         self.connect((self.digital_correlate_access_code_tag_xx_0, 0), (self.blocks_pack_k_bits_bb_0, 0))
         self.connect((self.iio_pluto_source_1, 0), (self.low_pass_filter_0, 0))
@@ -263,13 +258,6 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
         self.stop()
         self.wait()
 
-        try:
-            print("\n--- Decoded message ---")
-            print(extract_message(OUTPUT_FILE))
-            print("-----------------------\n")
-        except Exception as e:
-            print(f"Message decode failed: {e}")
-
         event.accept()
 
     def get_samp_rate(self):
@@ -277,19 +265,27 @@ class ook_demodulator(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.set_sps(self.samp_rate//4)
+        self.set_sps(self.samp_rate//self.bitss)
         self.iio_pluto_source_1.set_samplerate(self.samp_rate)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 5000, 1000, window.WIN_HAMMING, 6.76))
         self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_1_0.set_samp_rate(self.samp_rate)
 
+    def get_bitss(self):
+        return self.bitss
+
+    def set_bitss(self, bitss):
+        self.bitss = bitss
+        self.set_sps(self.samp_rate//self.bitss)
+
     def get_sps(self):
         return self.sps
 
     def set_sps(self, sps):
         self.sps = sps
-        self.blocks_keep_one_in_n_0_0.set_n(self.sps)
+        self.blocks_keep_m_in_n_0.set_offset(self.sps//2)
+        self.blocks_keep_m_in_n_0.set_n(self.sps)
 
     def get_selected_frequency(self):
         return self.selected_frequency

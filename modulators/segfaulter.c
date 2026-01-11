@@ -1,5 +1,4 @@
-// mem_burst_tx.c
-// Compile: gcc -O2 mem_burst_tx.c -o mem_burst_tx -pthread
+// Compile: gcc -O2 segfaulter.c -o segfaulter -pthread
 // Run as root or normal user; only on hardware you own.
 
 #include <stdio.h>

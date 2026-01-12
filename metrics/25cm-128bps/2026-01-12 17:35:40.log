@@ -1,0 +1,27 @@
+[2026-01-12 17:35:40]
+Original:
+1010110011110100101101010001001101100
+
+Received:
+0010110011111000000010111101100100100
+
+Key length:      128 bits
+Received length: 37 bits
+Compared:        37 bits
+
+✗ 14 bit errors detected
+First 16 mismatches at bit positions:
+  bit 0: rx=0 key=1
+  bit 12: rx=1 key=0
+  bit 13: rx=0 key=1
+  bit 16: rx=0 key=1
+  bit 18: rx=0 key=1
+  bit 19: rx=0 key=1
+  bit 20: rx=1 key=0
+  bit 21: rx=0 key=1
+  bit 22: rx=1 key=0
+  bit 24: rx=1 key=0
+  bit 25: rx=1 key=0
+  bit 28: rx=1 key=0
+  bit 30: rx=0 key=1
+  bit 33: rx=0 key=1

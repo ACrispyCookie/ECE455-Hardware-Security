@@ -241,7 +241,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 644.0]
+    coordinate: [976, 644.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_mag_0
@@ -275,7 +275,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1352, 628.0]
+    coordinate: [1688, 628.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0
@@ -299,7 +299,7 @@ blocks:
     bus_structure: null
     coordinate: [64, 636.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -331,7 +331,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 644.0]
+    coordinate: [1536, 644.0]
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -388,7 +388,7 @@ blocks:
     bus_structure: null
     coordinate: [288, 564.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_vector_source_x_0
   id: blocks_vector_source_x
   parameters:
@@ -421,7 +421,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 648.0]
+    coordinate: [1120, 648.0]
     rotation: 0
     state: enabled
 - name: digital_correlate_access_code_tag_xx_0
@@ -440,10 +440,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 628.0]
+    coordinate: [1280, 628.0]
     rotation: 0
     state: enabled
-- name: digital_symbol_sync_xx_0
+- name: digital_symbol_sync_xx_0_0
   id: digital_symbol_sync_xx
   parameters:
     affinity: ''
@@ -451,8 +451,8 @@ blocks:
     comment: ''
     constellation: digital.constellation_bpsk().base()
     damping: '1.0'
-    loop_bw: '0.045'
-    max_dev: '1'
+    loop_bw: '0.01'
+    max_dev: '1.0'
     maxoutbuf: '0'
     minoutbuf: '0'
     nfilters: '128'
@@ -467,9 +467,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1176, 356.0]
+    coordinate: [632, 716.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: fir_filter_xxx_1
   id: fir_filter_xxx
   parameters:
@@ -486,7 +486,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 636.0]
+    coordinate: [360, 764.0]
+    rotation: 0
+    state: disabled
+- name: fir_filter_xxx_1_0
+  id: fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: int(sps)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: '[0]*n_skip + [1]*n_keep + [0]*(int(sps) - n_keep - n_skip)'
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 636.0]
     rotation: 0
     state: enabled
 - name: iio_pluto_source_1
@@ -519,7 +538,7 @@ blocks:
     bus_structure: null
     coordinate: [64, 340.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: low_pass_filter_0
   id: low_pass_filter
   parameters:
@@ -994,15 +1013,17 @@ connections:
 - [blocks_multiply_xx_0, '0', virtual_sink_0, '0']
 - [blocks_pack_k_bits_bb_0, '0', blocks_file_sink_0, '0']
 - [blocks_repeat_0, '0', blocks_multiply_xx_0, '0']
-- [blocks_threshold_ff_0, '0', digital_symbol_sync_xx_0, '0']
+- [blocks_threshold_ff_0, '0', fir_filter_xxx_1_0, '0']
 - [blocks_threshold_ff_0, '0', qtgui_time_sink_x_1_0, '0']
 - [blocks_throttle_0, '0', low_pass_filter_0, '0']
 - [blocks_throttle_0, '0', qtgui_sink_x_0, '0']
 - [blocks_vector_source_x_0, '0', blocks_repeat_0, '0']
 - [digital_binary_slicer_fb_0, '0', digital_correlate_access_code_tag_xx_0, '0']
 - [digital_correlate_access_code_tag_xx_0, '0', blocks_pack_k_bits_bb_0, '0']
-- [digital_symbol_sync_xx_0, '0', fir_filter_xxx_1, '0']
+- [digital_symbol_sync_xx_0_0, '0', blocks_add_const_vxx_0, '0']
 - [fir_filter_xxx_1, '0', blocks_add_const_vxx_0, '0']
+- [fir_filter_xxx_1, '0', digital_symbol_sync_xx_0_0, '0']
+- [fir_filter_xxx_1_0, '0', blocks_add_const_vxx_0, '0']
 - [iio_pluto_source_1, '0', low_pass_filter_0, '0']
 - [iio_pluto_source_1, '0', qtgui_sink_x_0, '0']
 - [low_pass_filter_0, '0', blocks_complex_to_mag_0, '0']

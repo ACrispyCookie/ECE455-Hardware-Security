@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import time
+
 PREAMBLE = "10101001"
 EOM      = "11111111"
 
@@ -38,9 +40,19 @@ def main():
 
     mismatches, compared = compare_bits(payload_bits, key_bits)
 
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{timestamp}]")
+    print("Original:")
+    print(key_bits[:compared])
+    print()
+    print("Received:")
+    print(payload_bits[:compared])
+    print()
+
     print(f"Key length:      {len(key_bits)} bits")
     print(f"Received length: {len(payload_bits)} bits")
     print(f"Compared:        {compared} bits")
+    print()
 
     if not mismatches:
         print("✓ Perfect match — no bit errors detected")

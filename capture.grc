@@ -73,7 +73,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/tsiantosd/Desktop/hello_world-capture-8-bits.raw
+    file: /home/tsiantosd/Desktop/key-capture-64-bits.raw
     type: complex
     unbuffered: 'False'
     vlen: '1'

@@ -1,4 +1,4 @@
-// Compile: gcc -O2 segfaulter.c -o segfaulter -pthread
+// Compile: gcc -O2 pagefaulter.c -o pagefaulter -pthread
 // Run as root or normal user; only on hardware you own.
 
 #include <stdio.h>

@@ -3,10 +3,10 @@ CFLAGS  := -O2
 LDFLAGS :=
 
 # Programs to build
-TARGETS := segfaulter ramear
+TARGETS := pagefaulter ramear
 
 # Per-target flags
-segfaulter_CFLAGS := -pthread
+pagefaulter_CFLAGS := -pthread
 ramear_CFLAGS     := -msse2 -Wall -std=c99
 
 .DEFAULT_GOAL := help
@@ -14,15 +14,15 @@ ramear_CFLAGS     := -msse2 -Wall -std=c99
 help:
 	@echo "Available targets:"
 	@echo "  all         Build all programs ($(TARGETS))"
-	@echo "  segfaulter  Build segfaulter"
+	@echo "  pagefaulter  Build pagefaulter"
 	@echo "  ramear      Build ramear"
 	@echo "  clean       Remove built binaries"
 	@echo "  help        Show this help message"
 
 all: $(TARGETS)
 
-segfaulter: segfaulter.c
-	$(CC) $(CFLAGS) $(segfaulter_CFLAGS) $< -o $@
+pagefaulter: pagefaulter.c
+	$(CC) $(CFLAGS) $(pagefaulter_CFLAGS) $< -o $@
 
 ramear: ramear.c
 	$(CC) $(CFLAGS) $(ramear_CFLAGS) $< -o $@

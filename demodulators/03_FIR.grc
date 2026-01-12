@@ -93,7 +93,7 @@ blocks:
     start: '0'
     step: '0.001'
     stop: '1'
-    value: '0.017'
+    value: '0.0165'
     widget: counter_slider
   states:
     bus_sink: false
@@ -114,7 +114,7 @@ blocks:
     start: '0'
     step: '0.001'
     stop: '1'
-    value: '0.017'
+    value: '0.0165'
     widget: counter_slider
   states:
     bus_sink: false
@@ -241,7 +241,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 644.0]
+    coordinate: [256, 740.0]
     rotation: 0
     state: enabled
 - name: blocks_complex_to_mag_0
@@ -275,7 +275,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1352, 628.0]
+    coordinate: [984, 724.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0
@@ -331,7 +331,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 644.0]
+    coordinate: [832, 740.0]
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -367,7 +367,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 396.0]
+    coordinate: [264, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0
@@ -421,7 +421,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [784, 648.0]
+    coordinate: [416, 744.0]
     rotation: 0
     state: enabled
 - name: digital_correlate_access_code_tag_xx_0
@@ -440,7 +440,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 628.0]
+    coordinate: [576, 724.0]
     rotation: 0
     state: enabled
 - name: digital_symbol_sync_xx_0
@@ -467,7 +467,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1176, 356.0]
+    coordinate: [464, 532.0]
     rotation: 0
     state: enabled
 - name: fir_filter_xxx_1
@@ -486,7 +486,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 636.0]
+    coordinate: [824, 580.0]
     rotation: 0
     state: enabled
 - name: iio_pluto_source_1
@@ -517,7 +517,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 340.0]
+    coordinate: [240, 340.0]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -604,9 +604,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 156.0]
+    coordinate: [968, 308.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -662,9 +662,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 212.0]
+    coordinate: [736, 308.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_0_0
   id: qtgui_time_sink_x
   parameters:
@@ -759,9 +759,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 268.0]
+    coordinate: [968, 412.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_1
   id: qtgui_time_sink_x
   parameters:

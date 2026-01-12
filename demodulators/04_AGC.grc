@@ -182,7 +182,7 @@ blocks:
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_samples: int(sps * bitss / 10)
+    num_samples: int(sps * bitss / 4)
     reference: '1.0'
   states:
     bus_sink: false
@@ -569,6 +569,69 @@ blocks:
     coordinate: [864, 676.0]
     rotation: 0
     state: enabled
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: Mag
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '0'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.05'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1632, 396.0]
+    rotation: 0
+    state: true
 - name: qtgui_sink_x_0
   id: qtgui_sink_x
   parameters:
@@ -595,9 +658,38 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 384.0]
+    coordinate: [848, 396.0]
     rotation: 0
-    state: disabled
+    state: enabled
+- name: qtgui_sink_x_0_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '50'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1376, 428.0]
+    rotation: 0
+    state: enabled
 - name: qtgui_time_sink_x_1
   id: qtgui_time_sink_x
   parameters:
@@ -791,7 +883,7 @@ blocks:
     bus_structure: null
     coordinate: [1632, 504.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: virtual_sink_0
   id: virtual_sink
   parameters:
@@ -821,10 +913,12 @@ blocks:
 
 connections:
 - [analog_feedforward_agc_cc_0, '0', blocks_complex_to_mag_0, '0']
+- [analog_feedforward_agc_cc_0, '0', qtgui_sink_x_0_0, '0']
 - [analog_pwr_squelch_xx_0, '0', blocks_throttle_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
 - [blocks_add_const_vxx_0, '0', digital_binary_slicer_fb_0, '0']
 - [blocks_complex_to_mag_0, '0', digital_symbol_sync_xx_0, '0']
+- [blocks_complex_to_mag_0, '0', qtgui_number_sink_0, '0']
 - [blocks_complex_to_mag_0, '0', qtgui_time_sink_x_1_0, '0']
 - [blocks_file_source_0, '0', analog_pwr_squelch_xx_0, '0']
 - [blocks_multiply_xx_0, '0', qtgui_time_sink_x_1, '0']

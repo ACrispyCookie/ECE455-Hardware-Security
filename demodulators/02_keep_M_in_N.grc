@@ -474,7 +474,7 @@ blocks:
     comment: ''
     high: '0.12'
     init: '0'
-    low: '0.08'
+    low: '0.1'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:

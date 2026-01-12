@@ -163,11 +163,9 @@ int main(int argc, char **argv)
 
 	transmit_init();
 
-	while (1) {
-		transmit_begin();
-		transmit_bytes(data, (uint8_t)data_len);
-		transmit_end();
-	}
+	transmit_begin();
+	transmit_bytes(data, (uint8_t)data_len);
+	transmit_end();
 
 	free(data);
 	transmit_free();

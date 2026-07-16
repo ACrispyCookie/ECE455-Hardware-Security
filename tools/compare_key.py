@@ -33,8 +33,15 @@ def compare_bits(rx_bits, key_bits):
     return mismatches, min_len
 
 def main():
-    rx_bits  = file_to_bits("/tmp/output.bin")
-    key_bits = file_to_bits("./aes.key")
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Compare a received RAMBO bitstream against a reference key/file")
+    parser.add_argument("--received", default="/tmp/output.bin", help="Received bitstream file produced by the GNU Radio flowgraph")
+    parser.add_argument("--key", default="data/aes.key", help="Reference key or payload file to compare against")
+    args = parser.parse_args()
+
+    rx_bits  = file_to_bits(args.received)
+    key_bits = file_to_bits(args.key)
 
     payload_bits = find_framed_payload(rx_bits)
 

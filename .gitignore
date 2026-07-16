@@ -1,2 +1,33 @@
-__pycache__
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# GNU Radio generated Python flowgraphs
+flowgraphs/**/*.py
+
+# Transmitter build outputs
+src/transmitter/ramear
+src/transmitter/pagefaulter
+
+# Captures and decoded local output
+*.bin
+*.dat
+*.raw
+output.bin
 capture.py
+
+# Local/editor files
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# Submission/archive packages
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.7z
+*.rar

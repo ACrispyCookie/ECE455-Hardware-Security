@@ -1,12 +1,12 @@
-# ECE455 — Hardware Security
+# DDR RAM Electromagnetic Air-Gap Exfiltration
 
 ![C](https://img.shields.io/badge/C-systems-blue)
 ![GNU Radio](https://img.shields.io/badge/GNU%20Radio-SDR-purple)
 ![Air Gap](https://img.shields.io/badge/Air--gap-covert%20channel-red)
 ![Hardware Security](https://img.shields.io/badge/Hardware-security-orange)
-![Coursework](https://img.shields.io/badge/UTH-ECE455-green)
+![Coursework](https://img.shields.io/badge/UTH-ECE455-teal)
 
-A covert radio-channel prototype that leaks data from an isolated computer by turning DDR RAM activity into a signal recoverable with SDR and GNU Radio.
+Course project for **ECE455 — Hardware Security** at the **University of Thessaly**, focused on leaking data from an isolated computer by turning DDR RAM activity into a signal recoverable with SDR and GNU Radio.
 
 ## What this project does
 
@@ -14,9 +14,11 @@ This project demonstrates an end-to-end air-gap data exfiltration channel. A use
 
 The recovered bitstream is then aligned, decoded, and compared against the original payload, such as an AES key.
 
-![ADALM-PLUTO SDR listening for emissions from the target machine's RAM activity.](docs/assets/setup.jpg)
+<p align="center">
+  <img src="docs/assets/setup.jpg" alt="ADALM-PLUTO SDR listening for emissions from the target machine's RAM activity" width="100%">
+</p>
 
-## Standout work
+## Highlights
 
 The standout implementation is a practical electromagnetic side-channel attack for leaking data from an air-gapped computer without network connectivity, kernel privileges, or hardware modification.
 
@@ -47,7 +49,9 @@ Example successful metric log:
 ✓ Perfect match — no bit errors detected
 ```
 
-![Capturing and decoding a message in real time using GNU Radio and a helper script.](docs/assets/demo.gif)
+<p align="center">
+  <img src="docs/assets/demo.gif" alt="Capturing and decoding a message in real time using GNU Radio and a helper script" width="100%">
+</p>
 
 ## Attack pipeline
 
@@ -79,19 +83,19 @@ Preamble: 10101001
 EOM:      11111111
 ```
 
-## Repository structure
+## Repository contents
 
 | Path | Description |
 | --- | --- |
-| `src/transmitter/` | Target-side C transmitters and Makefile. |
-| `flowgraphs/receiver/` | GNU Radio Companion receiver/demodulator designs. |
-| `flowgraphs/capture.grc` | Additional capture flowgraph. |
-| `tools/` | Python utilities for decoding, comparing, and shifting bitstreams. |
-| `data/` | Example payloads such as the AES key and hello-world message. |
-| `experiments/metrics/` | Captured bit-error logs grouped by distance and bitrate. |
-| `docs/report.pdf` | Final project report. |
-| `docs/presentation.pptx` | Final presentation slides. |
-| `docs/assets/` | Setup and demo media used in this README. |
+| [`src/transmitter/`](src/transmitter/) | Target-side C transmitters and Makefile. |
+| [`flowgraphs/receiver/`](flowgraphs/receiver/) | GNU Radio Companion receiver/demodulator designs. |
+| [`flowgraphs/capture.grc`](flowgraphs/capture.grc) | Additional capture flowgraph. |
+| [`tools/`](tools/) | Python utilities for decoding, comparing, and shifting bitstreams. |
+| [`data/`](data/) | Example payloads such as the AES key and hello-world message. |
+| [`experiments/metrics/`](experiments/metrics/) | Captured bit-error logs grouped by distance and bitrate. |
+| [`docs/report.pdf`](docs/report.pdf) | Final project report. |
+| [`docs/presentation.pptx`](docs/presentation.pptx) | Final presentation slides. |
+| [`docs/assets/`](docs/assets/) | Setup and demo media used in this README. |
 
 ## Requirements
 

@@ -93,8 +93,8 @@ EOM:      11111111
 | [`tools/`](tools/) | Python utilities for decoding, comparing, and shifting bitstreams. |
 | [`data/`](data/) | Example payloads such as the AES key and hello-world message. |
 | [`experiments/metrics/`](experiments/metrics/) | Captured bit-error logs grouped by distance and bitrate. |
-| [`docs/report.pdf`](docs/report.pdf) | Final project report. |
-| [`docs/presentation.pptx`](docs/presentation.pptx) | Final presentation slides. |
+| [`docs/reports/ece455-hardware-security-report.pdf`](docs/reports/ece455-hardware-security-report.pdf) | Final project report. |
+| [`docs/presentations/ece455-hardware-security-presentation.pdf`](docs/presentations/ece455-hardware-security-presentation.pdf) | Final presentation slides. |
 | [`docs/assets/`](docs/assets/) | Setup and demo media used in this README. |
 
 ## Requirements

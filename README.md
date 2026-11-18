@@ -20,9 +20,9 @@ The recovered bitstream is then aligned, decoded, and compared against the origi
 
 ## Highlights
 
-The standout implementation is a practical electromagnetic side-channel attack for leaking data from an air-gapped computer without network connectivity, kernel privileges, or hardware modification.
+The project is an electromagnetic side channel that leaks data from an air-gapped computer without network connectivity, kernel privileges, or hardware modification.
 
-Key pieces of the project include:
+Components:
 
 - **RAM activity transmitter:** C programs stress memory in controlled bit intervals to encode data as radio-observable DDR bus activity.
 - **Cache-bypassing memory traffic:** the transmitter uses non-temporal memory instructions so memory activity reaches the DDR bus instead of being hidden by CPU caches.

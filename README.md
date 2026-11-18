@@ -1,10 +1,8 @@
 # DDR RAM Electromagnetic Air-Gap Exfiltration
 
-![C](https://img.shields.io/badge/C-systems-blue)
-![GNU Radio](https://img.shields.io/badge/GNU%20Radio-SDR-purple)
-![Air Gap](https://img.shields.io/badge/Air--gap-covert%20channel-red)
-![Hardware Security](https://img.shields.io/badge/Hardware-security-orange)
-![Coursework](https://img.shields.io/badge/UTH-ECE455-teal)
+![C](https://img.shields.io/badge/C-0E7C86?style=flat&logo=c&logoColor=white)
+![GNU Radio](https://img.shields.io/badge/GNU%20Radio-8A6D2B?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAxMnY5TTguNSAyMWg3Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMS42IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTcuOCA1LjhhNiA2IDAgMCAwIDAgOC40TTE2LjIgNS44YTYgNiAwIDAgMSAwIDguNE00LjkgMi45YTEwIDEwIDAgMCAwIDAgMTQuMk0xOS4xIDIuOWExMCAxMCAwIDAgMSAwIDE0LjIiLz48L3N2Zz4=)
+![SDR](https://img.shields.io/badge/SDR-2E7D5B?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAxMnY5TTguNSAyMWg3Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMS42IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTcuOCA1LjhhNiA2IDAgMCAwIDAgOC40TTE2LjIgNS44YTYgNiAwIDAgMSAwIDguNE00LjkgMi45YTEwIDEwIDAgMCAwIDAgMTQuMk0xOS4xIDIuOWExMCAxMCAwIDAgMSAwIDE0LjIiLz48L3N2Zz4=)
 
 Course project for **ECE455 — Hardware Security** at the **University of Thessaly**, focused on leaking data from an isolated computer by turning DDR RAM activity into a signal recoverable with SDR and GNU Radio.
 
